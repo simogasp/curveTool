@@ -19,4 +19,6 @@ Point lerp(const Point& p1, const Point& p2, double t);
 std::optional<std::size_t> getClosestPointIndex(const std::vector<Point>& vec, const Point &p, double threshold);
 std::optional<Point> getClosestPoint(const std::vector<Point>& vec, const Point &p, double threshold);
 bool deletePoint(std::vector<Point>& vec, const Point& p, double threshold);
+void deletePointAtIndex(std::vector<Point>& vec, std::size_t idx);
 bool updatePoint(std::vector<Point>& vec, const Point& p_old, const Point& p_new, double threshold);
+void updatePointAtIndex(std::vector<Point>& vec, std::size_t idx, const Point& p_new);

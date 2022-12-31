@@ -46,7 +46,7 @@ bool deletePoint(std::vector<Point>& vec, const Point& p, double threshold)
     const auto res = getClosestPointIndex(vec, p, threshold);
     if(res.has_value())
     {
-        vec.erase(std::next(vec.begin(), static_cast<long>(res.value())));
+        deletePointAtIndex(vec, res.value());
         return true;
     }
     return false;
@@ -57,8 +57,26 @@ bool updatePoint(std::vector<Point>& vec, const Point& p_old, const Point& p_new
     const auto res = getClosestPointIndex(vec, p_old, threshold);
     if(res.has_value())
     {
-        vec[res.value()] = p_new;
+        updatePointAtIndex(vec, res.value(), p_new);
         return true;
     }
     return false;
+}
+
+void deletePointAtIndex(std::vector<Point>& vec, std::size_t idx)
+{
+    if(idx >= vec.size())
+    {
+        throw std::invalid_argument("Index of the point to remove is out of bounds");
+    }
+    vec.erase(std::next(vec.begin(), static_cast<long>(idx)));
+}
+
+void updatePointAtIndex(std::vector<Point>& vec, std::size_t idx, const Point& p_new)
+{
+    if(idx >= vec.size())
+    {
+        throw std::invalid_argument("Index of the point to update is out of bounds");
+    }
+    vec[idx] = p_new;;
 }
