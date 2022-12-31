@@ -14,22 +14,22 @@ find_package(glm REQUIRED)
 message(STATUS "GLM_INCLUDE_DIRS ${GLM_INCLUDE_DIRS}")
 
 set(LIB_SOURCE_FILES
-        src/approximation.cpp
-        src/BezierCurve.cpp
-        src/ControlPoints.cpp
-        src/interpolation.cpp
-        src/InterpolationCurve.cpp
-        src/parametrization.cpp
-        src/Point.cpp)
+        src/curves/approximation.cpp
+        src/curves/BezierCurve.cpp
+        src/curves/ControlPoints.cpp
+        src/curves/interpolation.cpp
+        src/curves/InterpolationCurve.cpp
+        src/curves/parametrization.cpp
+        src/curves/Point.cpp)
 
 set(LIB_HEADER_FILES
-        src/approximation.h
-        src/BezierCurve.h
-        src/ControlPoints.h
-        src/Point.h
-        src/parametrization.h
-        src/interpolation.h
-        src/InterpolationCurve.h)
+        src/curves/approximation.h
+        src/curves/BezierCurve.h
+        src/curves/ControlPoints.h
+        src/curves/Point.h
+        src/curves/parametrization.h
+        src/curves/interpolation.h
+        src/curves/InterpolationCurve.h)
 
 set(LIBRARY_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_library(curves ${LIB_SOURCE_FILES} ${LIB_HEADER_FILES})

@@ -1,6 +1,6 @@
-#include "BezierCurve.h"
 #include "Camera.h"
-#include "ControlPoints.h"
+#include <curves/BezierCurve.h>
+#include <curves/ControlPoints.h>
 
 #include <cstdlib>
 

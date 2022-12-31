@@ -1,7 +1,8 @@
-#include <cstdlib>
 #include "Camera.h"
-#include "InterpolationCurve.h"
-#include "ControlPoints.h"
+#include <curves/ControlPoints.h>
+#include <curves/InterpolationCurve.h>
+
+#include <cstdlib>
 
 // for mac osx
 #ifdef __APPLE__

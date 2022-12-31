@@ -1,9 +1,10 @@
 #define BOOST_TEST_MODULE testCurves
 
 #define BOOST_TEST_DYN_LINK
+#include <curves/parametrization.h>
+
 #include <boost/test/unit_test.hpp>
 
-#include "parametrization.h"
 #include <vector>
 
 BOOST_AUTO_TEST_SUITE( test_uniformParametrization )
