@@ -22,7 +22,7 @@ double lagrange(double x, const std::vector<double>& X, const std::vector<double
     return sum;
 }
 
-std::tuple<std::vector<double>, std::vector<double>> splitCoordinates(const std::vector<Point>& points)
+std::pair<std::vector<double>, std::vector<double>> splitCoordinates(const std::vector<Point>& points)
 {
     std::vector<double> X{};
     X.reserve(points.size());

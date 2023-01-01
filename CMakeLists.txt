@@ -12,6 +12,7 @@ find_package(GLUT REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glm REQUIRED)
 message(STATUS "GLM_INCLUDE_DIRS ${GLM_INCLUDE_DIRS}")
+message(STATUS "GLEW_LIBRARIES ${GLEW_LIBRARIES}")
 
 set(LIB_SOURCE_FILES
         src/curves/approximation.cpp
@@ -38,11 +39,11 @@ target_link_libraries(curves PUBLIC glm::glm)
 
 set(EXECUTABLE_TARGETS "")
 add_executable(mainApproximation src/mainApproximation.cpp src/Camera.cpp src/Camera.h)
-target_link_libraries (mainApproximation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_glu_LIBRARY} curves)
+target_link_libraries (mainApproximation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLEW::glew ${OPENGL_glu_LIBRARY} curves)
 list(APPEND EXECUTABLE_TARGETS "mainApproximation")
 
 add_executable(mainInterpolation src/mainInterpolation.cpp src/Camera.cpp src/Camera.h)
-target_link_libraries (mainInterpolation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_glu_LIBRARY} curves)
+target_link_libraries (mainInterpolation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLEW::glew ${OPENGL_glu_LIBRARY} curves)
 list(APPEND EXECUTABLE_TARGETS "mainInterpolation")
 
 foreach(target ${EXECUTABLE_TARGETS})
