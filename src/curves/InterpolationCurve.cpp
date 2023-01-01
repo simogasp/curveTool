@@ -41,6 +41,13 @@ bool InterpolationCurve::updateControlPoint(const Point& p_old, const Point& p_n
     }
     return false;
 }
+
+void InterpolationCurve::updateControlPointAtIndex(std::size_t idx, const Point& p_new, double threshold)
+{
+    ControlPoints::updateControlPointAtIndex(idx, p_new, threshold);
+    make();
+}
+
 std::optional<Point> InterpolationCurve::getClosestPoint(const Point& p, double threshold) const
 {
     return ControlPoints::getClosestPoint(p, threshold);

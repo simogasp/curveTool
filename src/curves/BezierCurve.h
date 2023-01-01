@@ -38,6 +38,7 @@ public:
     bool deleteControlPoint(const Point& p, double threshold) override;
 
     bool updateControlPoint(const Point& p_old, const Point& p_new, double threshold) override;
+    void updateControlPointAtIndex(std::size_t idx, const Point& p_new, double threshold) override;
 
     void reset() override;
 

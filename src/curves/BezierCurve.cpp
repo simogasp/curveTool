@@ -31,6 +31,12 @@ bool BezierCurve::updateControlPoint(const Point& p_old, const Point& p_new, dou
     return false;
 }
 
+void BezierCurve::updateControlPointAtIndex(std::size_t idx, const Point& p_new, double threshold)
+{
+    ControlPoints::updateControlPointAtIndex(idx, p_new, threshold);
+    make();
+}
+
 void BezierCurve::make()
 {
     curvePoints.clear();

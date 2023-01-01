@@ -15,10 +15,12 @@ public:
     virtual void add(Point p);
 
     [[nodiscard]] virtual std::optional<Point> getClosestPoint(const Point& p, double threshold) const;
+    [[nodiscard]] virtual std::optional<std::size_t> getIndexClosestPoint(const Point& p, double threshold) const;
 
     virtual bool deleteControlPoint(const Point& p, double threshold);
 
     virtual bool updateControlPoint(const Point& p_old, const Point& p_new, double threshold);
+    virtual void updateControlPointAtIndex(std::size_t idx, const Point& p_new, double threshold);
 
     virtual void reset();
 

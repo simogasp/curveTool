@@ -28,7 +28,7 @@ using namespace std;
 Camera* camera;
 std::unique_ptr<InterpolationCurve> inter;
 bool track{false};
-Point draggedPoint;
+std::size_t draggedPointIdx;
 /*
  * Params
  */
@@ -144,11 +144,11 @@ void mouseClick(int button, int state, int x, int y)
     }
     else if(button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) // start tracking mouse for dragging
     {
-        const auto res = inter->getClosestPoint(n, clickThresh);
+        const auto res = inter->getIndexClosestPoint(n, clickThresh);
         if(res.has_value())
         {
             track = true;
-            draggedPoint = Point(res.value());
+            draggedPointIdx = res.value();
         }
     }
     else if(button == GLUT_RIGHT_BUTTON && state == GLUT_UP) // stop tracking
@@ -168,10 +168,7 @@ void mouseMove(int x, int y)
     if(!track)
         return;
     Point p = {(double)x, window_height - (double)y};
-    if(inter->updateControlPoint(draggedPoint, p, clickThresh))
-    {
-        draggedPoint = p;
-    }
+    inter->updateControlPointAtIndex(draggedPointIdx, p, clickThresh);
     glutPostRedisplay();
 }
 
