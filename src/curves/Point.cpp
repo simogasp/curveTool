@@ -1,5 +1,7 @@
 #include "Point.h"
 
+#include <stdexcept>
+
 Point lerp(const Point &p1, const Point &p2, double t)
 {
     //linear interpolation

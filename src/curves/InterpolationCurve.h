@@ -12,7 +12,7 @@ public:
     struct Parameters
     {
         Parameters() = default;
-        Parameters(double x_min, double x_max, double step) : xmin(x_min), xmax(x_max), step(step) { }
+        Parameters(double x_min, double x_max, double p_step) : xmin(x_min), xmax(x_max), step(p_step) { }
         double xmin{0};
         double xmax{100};
         double step{0.1};

@@ -2,11 +2,10 @@
 #include <curves/ControlPoints.h>
 #include <curves/InterpolationCurve.h>
 
-#include <cstdlib>
+#include <glm/gtc/type_ptr.hpp>
 
 // for mac osx
 #ifdef __APPLE__
-#include <glm/gtc/type_ptr.hpp>
 #include <GLUT/glut.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -20,6 +19,8 @@
 #include <GL/glu.h>
 #include <GL/freeglut.h>
 #endif
+
+#include <cstdlib>
 
 using namespace std;
 /*
