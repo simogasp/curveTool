@@ -85,7 +85,7 @@ jobs:
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
         buildDirectory: ${{ env.buildDir }}
 #        cmakeGenerator: VS16Win64
-        cmakeAppendedArgs: -DBUILD_SHARED_LIBS:BOOL=ON -DVCPKG_TARGET_TRIPLET=x64-windows -A x64 -T host=x64
+        cmakeAppendedArgs: -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=ON -DVCPKG_TARGET_TRIPLET=x64-windows -A x64 -T host=x64
         # This input tells run-cmake to consume the vcpkg.cmake toolchain file set by run-vcpkg.
         cmakeBuildType: ${{ matrix.config }}
         useVcpkgToolchainFile: true
