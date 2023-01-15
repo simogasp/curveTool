@@ -4,6 +4,13 @@ project(CurveTool LANGUAGES CXX)
 option(BUILD_TESTS "Enable testing" ON)
 option(BUILD_SHARED_LIBS "Build shared library" ON)
 
+if(BUILD_SHARED_LIBS)
+    if(WIN32)
+        # export all symbols on a windows build of dynamic libs
+        set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS  ON)
+    endif()
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
