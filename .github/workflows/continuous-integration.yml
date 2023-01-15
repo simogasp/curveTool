@@ -40,7 +40,6 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
-# strange error at build, it looks for Debug/curves.lib even if it is release and dynamic.
   build_windows:
     runs-on: windows-latest
     strategy:
