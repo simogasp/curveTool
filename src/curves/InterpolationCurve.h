@@ -19,7 +19,7 @@ public:
     };
 
     explicit InterpolationCurve() = default;
-    explicit InterpolationCurve(Parameters p) : param(p) { }
+    explicit InterpolationCurve(const Parameters& p) : param(p) { }
     ~InterpolationCurve() override = default;
 
     void add(Point p) override;
