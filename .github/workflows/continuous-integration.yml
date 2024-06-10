@@ -48,8 +48,8 @@ jobs:
     env:
       buildDir: '${{ github.workspace }}\build\'
       vcpkgDir: '${{ github.workspace }}\e\vcpkg'
-      # commit for version 2022.11.14
-      COMMIT_ID: 6f7ffeb18f99796233b958aaaf14ec7bd4fb64b2
+      # commit for version 2023.11.20
+      COMMIT_ID: a42af01b72c28a8e1d7b48107b33e4f286a55ef6
 
     steps:
     - name: Checkout
@@ -72,7 +72,7 @@ jobs:
         # doNotCache: true
         # This is used to unbreak cached artifacts if for some reason dependencies fail to build,
         # the action does not notice it and saves broken artifacts.
-        appendedCacheKey: cache005
+        appendedCacheKey: cache006
 
     - name: vcpkg - Display installed packages
       run:
@@ -90,7 +90,7 @@ jobs:
         cmakeBuildType: ${{ matrix.config }}
         useVcpkgToolchainFile: true
         buildWithCMake: true
-        buildWithCMakeArgs: -j1
+        buildWithCMakeArgs: -j1 --config ${{ matrix.config }}
 
     - name: UnitTests
       uses: lukka/run-cmake@v3
@@ -99,7 +99,7 @@ jobs:
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
         buildDirectory: ${{ env.buildDir }}
         cmakeAppendedArgs: -DBUILD_TESTS:BOOL=ON -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=ON -DVCPKG_TARGET_TRIPLET=x64-windows -A x64 -T host=x64
-        buildWithCMakeArgs: '--target RUN_TESTS'
+        buildWithCMakeArgs: --target RUN_TESTS --config ${{ matrix.config }}
         # This input tells run-cmake to consume the vcpkg.cmake toolchain file set by run-vcpkg.
         cmakeBuildType: ${{ matrix.config }}
         useVcpkgToolchainFile: true
