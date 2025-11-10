@@ -3,23 +3,25 @@
 ## Building instructions
 
 Required tools:
+
 * C/C++ 17 compiler (gcc or visual studio or clang)
 * cmake
 
-###  Dependencies
+### Dependencies
 
 The project depends on:
 
-- OpenGL
-- freeglut (included for ease in Windows)
-- glew
-- glm
-- [optional] boost (for the tests)
+* OpenGL
+* freeglut (included for ease in Windows)
+* glew
+* glm
+* [optional] google test (for the tests)
 
 ## Building
-  - [Windows](#windows)
-  - [Linux](#linux)
-  - [MacOs](#macos)
+
+* [Windows](#windows)
+* [Linux](#linux)
+* [MacOs](#macos)
 
 ---
 
@@ -29,61 +31,61 @@ The project depends on:
 
 Not necessary if you already did the previous tp, but to recall:
 
-- download and install the latest version of CMake
+* download and install the latest version of CMake
 
-  - download here (choose "Windows x64 Installer:"): <https://cmake.org/download/>
+  * download here (choose "Windows x64 Installer:"): <https://cmake.org/download/>
 
 > [!IMPORTANT]
 > When installing make sure that the checkbox "ne pas ajouter cmake au PATH" is NOT checked
 
-- if you don't have it already, download and install MS Visual Studio Community Edition (free for students): <https://visualstudio.microsoft.com/downloads/>
+* if you don't have it already, download and install MS Visual Studio Community Edition (free for students): <https://visualstudio.microsoft.com/downloads/>
 
-  - install instructions here: <https://docs.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=vs-2019>
+  * install instructions here: <https://docs.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=vs-2019>
 
 > [!IMPORTANT]
 > install the "Desktop development with C++"
   
-  - If you have VS already installed, you can go in **Tools** --> **Get Tools and Features...** to install "Desktop development with C++" if it is missing.
+* If you have VS already installed, you can go in **Tools** --> **Get Tools and Features...** to install "Desktop development with C++" if it is missing.
 
 ### Create the Visual Studio Solution
 
 This step enables you to create the project file to load inside VS:
 
-- unzip the code inside a folder.
+* unzip the code inside a folder.
 
 > [!WARNING]
 > Avoid to place the code in folders with spaces and accented characters in the path.
 
-- open a Terminal and go to the directory containing the code.
+* open a Terminal and go to the directory containing the code.
 
-- execute:
+* execute:
 
-  - `md build`
+  * `md build`
   
-  - `cd build`
+  * `cd build`
   
-  - `cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE:STRING=Release ..`
+  * `cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE:STRING=Release ..`
   
-  - `dir`
+  * `dir`
   
 > [!NOTE]
 > if you had a different version of VS installed (not the latest) you may need to adapt the string `Visual Studio 16 2019` to your version: e.g. Visual Studio 15 2017, Visual Studio 14 2015, Visual Studio 12 2013
   
-- if everything went well you should find a file named `CurveTool.sln` inside the directory.
+* if everything went well you should find a file named `CurveTool.sln` inside the directory.
 
 ### Compile, build, execute
 
-- open `CurveTool.sln` inside VS either by double clicking on it or opening from inside VS
+* open `CurveTool.sln` inside VS either by double clicking on it or opening from inside VS
 
-- build the solution (**Build Solution** from the **Build menu**)
+* build the solution (**Build Solution** from the **Build menu**)
 
-- from the tp directory copy `freeglut\bin\x64\freeglut.dll` in `build\Release`
+* from the tp directory copy `freeglut\bin\x64\freeglut.dll` in `build\Release`
 
-- execute the code:  
+* execute the code:  
 
-  - Select the project you want to run right click on it and select **Set as Startup Project** 
+  * Select the project you want to run right click on it and select **Set as Startup Project**
   
-  - On the menu bar, choose **Debug** --> **Start without debugging**.
+  * On the menu bar, choose **Debug** --> **Start without debugging**.
 
 (see <https://docs.microsoft.com/en-us/cpp/build/vscpp-step-2-build?view=vs-2019> for how to build, execute, etc)
 
@@ -128,13 +130,14 @@ sudo ./cmake-X.YY.Z-Linux-x86_64.sh --prefix=/usr/local/ --skip-license
   
 ### Build
 
-To compile and build the code you do 
+To compile and build the code you do
 
  ```shell
  mkdir build && cd build
  cmake ..
  make a
  ```
+
 and
 
 ```shell

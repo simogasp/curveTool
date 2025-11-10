@@ -4,7 +4,7 @@ A tool to experiment on point interpolation and approximation.
 
 ## Interpolation
 
-The tool allows to interpolate a set of points using different methods and parametrizations.
+The tool allows interpolating a set of points using different methods and parametrizations.
 Click on the screen to add points and use the following keys to interact with the tool:
 
 - `c` to clear the screen
@@ -19,7 +19,7 @@ You can click on a point with the right mouse button to move it.
 
 ## Approximation
 
-The tool allows visualize the Bezier curve of a set of points.
+The tool allows visualizing the Bezier curve of a set of points.
 
 ## Continuous integration
 
