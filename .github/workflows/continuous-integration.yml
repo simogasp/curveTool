@@ -32,7 +32,7 @@ jobs:
         cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DBUILD_TESTS:BOOL=ON
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
+      uses: github/codeql-action/init@v4
 
     - name: Build
       working-directory: ./build
@@ -43,7 +43,7 @@ jobs:
         cd build
         ctest
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      uses: github/codeql-action/analyze@v4
 
   build_windows:
     runs-on: windows-latest
