@@ -84,7 +84,7 @@ jobs:
           ${{ env.vcpkgDir }}\vcpkg.exe list
 
     - name: Build
-      uses: lukka/run-cmake@v3
+      uses: lukka/run-cmake@v10
       with:
         cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
@@ -98,7 +98,7 @@ jobs:
         buildWithCMakeArgs: -j1 --config ${{ matrix.config }}
 
     - name: UnitTests
-      uses: lukka/run-cmake@v3
+      uses: lukka/run-cmake@v10
       with:
         cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
