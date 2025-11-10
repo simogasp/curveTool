@@ -24,7 +24,7 @@ jobs:
         # Install CMake
         sudo apt-get update
         # Install OpenGL dependencies
-        sudo apt-get install cmake libglu1-mesa-dev freeglut3-dev mesa-common-dev libglm-dev libglew-dev libboost-test-dev
+        sudo apt-get install cmake libglu1-mesa-dev freeglut3-dev mesa-common-dev libglm-dev libglew-dev libgtest-dev
     - name: Configure
       run: |
         mkdir build
@@ -72,7 +72,7 @@ jobs:
         # Location of the vcpkg submodule in the Git repository.
         vcpkgDirectory: ${{ env.vcpkgDir }}
         vcpkgGitCommitId: ${{ env.COMMIT_ID }}
-        vcpkgArguments: boost-test freeglut glew glm
+        vcpkgArguments: gtest freeglut glew glm
         vcpkgTriplet: x64-windows
         # doNotCache: true
         # This is used to unbreak cached artifacts if for some reason dependencies fail to build,
@@ -121,7 +121,7 @@ jobs:
 #        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 #        # Install CMake and OpenGL dependencies
 #        export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK="ON"
-#        brew install cmake freeglut glm glew boost
+#        brew install cmake freeglut glm glew googletest
 #    - name: Build
 #      run: |
 #        mkdir build
