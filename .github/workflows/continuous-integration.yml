@@ -18,7 +18,7 @@ jobs:
       matrix:
         config: [ Debug, Release ]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     - name: Install dependencies
       run: |
         # Install CMake
@@ -32,7 +32,7 @@ jobs:
         cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DBUILD_TESTS:BOOL=ON
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
 
     - name: Build
       working-directory: ./build
@@ -43,7 +43,7 @@ jobs:
         cd build
         ctest
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
 
   build_windows:
     runs-on: windows-latest
@@ -58,7 +58,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v5
 
     - name: Install latest CMake.
       uses: lukka/get-cmake@latest
