@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.20)
 project(CurveTool LANGUAGES CXX)
 
 option(BUILD_TESTS "Enable testing" ON)
@@ -65,11 +65,41 @@ foreach(target ${EXECUTABLE_TARGETS})
 endforeach()
 
 if(BUILD_TESTS)
-    find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+
+    find_package(GTest QUIET)
+    if(NOT GTest_FOUND)
+        message(STATUS "GTest not found, fetching GTest")
+        # Set up googletest
+        include(FetchContent)
+        FetchContent_Declare(
+            googletest
+            GIT_TAG v1.17.0
+            GIT_REPOSITORY https://github.com/google/googletest.git
+            FIND_PACKAGE_ARGS 1.16.0 NAMES GTest COMPONENTS gmain_main
+            EXCLUDE_FROM_ALL
+            SYSTEM
+        )
+
+        # For Windows: Prevent overriding the parent project's compiler/linker settings
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+        FetchContent_MakeAvailable(googletest)
+    endif()
     enable_testing()
-    set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-    include(BoostTestHelper)
-    add_boost_test(SOURCE src/tests/parametrization_test.cpp LINK curves PREFIX curves)
-    add_boost_test(SOURCE src/tests/interpolation_test.cpp LINK curves PREFIX curves)
-    add_boost_test(SOURCE src/tests/point_test.cpp LINK curves PREFIX curves)
+
+    include(GoogleTest)
+    set(TESTS_TARGETS "")
+    add_executable(parametrization_test src/tests/parametrization_test.cpp)
+    list(APPEND TESTS_TARGETS parametrization_test)
+    add_executable(interpolation_test src/tests/interpolation_test.cpp)
+    list(APPEND TESTS_TARGETS interpolation_test)
+    add_executable(point_test src/tests/point_test.cpp)
+    list(APPEND TESTS_TARGETS point_test)
+
+    foreach(target ${TESTS_TARGETS})
+        target_link_libraries(${target} GTest::gtest_main curves)
+        gtest_discover_tests(${target} PREFIX curves)
+    endforeach()
+
+
+
 endif()
