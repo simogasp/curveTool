@@ -22,4 +22,6 @@ You can click on a point with the right mouse button to move it.
 The tool allows visualize the Bezier curve of a set of points.
 
 ## Continuous integration
+
 [![CI](https://github.com/simogasp/curveTool/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/simogasp/curveTool/actions/workflows/continuous-integration.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f543295bea244f989ee4fc4c87f017ae)](https://app.codacy.com/gh/simogasp/curveTool/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
