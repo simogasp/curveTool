@@ -10,7 +10,7 @@ bool ControlPoints::updateControlPoint(const Point& p_old, const Point& p_new, d
     return updatePoint(controlPoints, p_old, p_new, threshold);
 }
 
-void ControlPoints::updateControlPointAtIndex(std::size_t idx, const Point& p_new, double threshold)
+void ControlPoints::updateControlPointAtIndex(std::size_t idx, const Point& p_new, double)
 {
     return updatePointAtIndex(controlPoints, idx, p_new);
 }
