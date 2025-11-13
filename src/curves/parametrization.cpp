@@ -135,7 +135,7 @@ std::vector<double> createSamples(double step, const std::vector<double>& T)
 
     for(std::size_t i{0}; i < tToEval.size(); ++i)
     {
-        tToEval[i] = start + i * step;
+        tToEval[i] = start + static_cast<double>(i) * step;
     }
     // just assure that the last element is the end value
     if(tToEval.back() < end)
