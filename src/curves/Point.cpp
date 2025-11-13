@@ -80,5 +80,5 @@ void updatePointAtIndex(std::vector<Point>& vec, std::size_t idx, const Point& p
     {
         throw std::invalid_argument("Index of the point to update is out of bounds");
     }
-    vec[idx] = p_new;;
+    vec[idx] = p_new;
 }
