@@ -35,7 +35,7 @@ TEST(PointTest, GetClosestPoint)
         }
     }
     // identity check
-    for(const auto& idx : {0, 1, 2, 3, 4})
+    for(const auto& idx : {0u, 1u, 2u, 3u, 4u})
     {
         const auto& p = vec[idx];
         for(const auto threshold : {.01, .1, 1., 10., 100.})
@@ -48,7 +48,7 @@ TEST(PointTest, GetClosestPoint)
 
     const std::vector<Point> midpoint { {-2.5, -2.5}, {-1.5, -1.5}, {.5, .5}, {1.5, 1.5}, {2.5, 2.5} };
     const std::vector<std::size_t> idx_closest{0, 0, 2, 3, 4};
-    for(const auto& idx : {0, 1, 2, 3, 4})
+    for(const auto& idx : {0u, 1u, 2u, 3u, 4u})
     {
         const auto& p = midpoint[idx];
         for(const auto threshold : {.01, .1, 1., 10., 100.})
@@ -73,7 +73,7 @@ TEST(PointTest, UpdatePoint)
     const Point p_end{-1.5, 6.5};
     std::vector<Point> vec { {-2., -2.}, {-1., -1.}, {.0, .0}, {1., 1.}, {2., 2.} };
 
-    for(const auto& idx : {0, 1, 2, 3, 4})
+    for(const auto& idx : {0u, 1u, 2u, 3u, 4u})
     {
         for(auto t : {.0, .25, .5, .75, 1.})
         {
@@ -83,7 +83,7 @@ TEST(PointTest, UpdatePoint)
             EXPECT_NEAR(glm::distance(vec[idx], p_new), 0, 0.000001);
         }
     }
-    for(const auto& idx : {10, 100, 22, 43, 46})
+    for(const auto& idx : {10u, 100u, 22u, 43u, 46u})
     {
         EXPECT_THROW(updatePointAtIndex(vec, idx, {}), std::invalid_argument);
     }
@@ -94,7 +94,7 @@ TEST(PointTest, DeletePoint)
 {
     std::vector<Point> vec { {-2., -2.}, {-1., -1.}, {.0, .0}, {1., 1.}, {2., 2.} };
 
-    for(const std::size_t idx : {2, 3, 0})
+    for(const std::size_t idx : {2u, 3u, 0u})
     {
             const auto p_orig = vec[idx];
             const auto size_orig = vec.size();
@@ -102,7 +102,7 @@ TEST(PointTest, DeletePoint)
             EXPECT_EQ(vec.size(), size_orig-1);
             EXPECT_GT(glm::distance(vec[std::min(idx, vec.size()-1)], p_orig), 1);
     }
-    for(const auto& idx : {10, 100, 22, 43, 46})
+    for(const auto& idx : {10u, 100u, 22u, 43u, 46u})
     {
         EXPECT_THROW(deletePointAtIndex(vec, idx), std::invalid_argument);
     }
