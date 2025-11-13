@@ -25,8 +25,8 @@ void rootDistanceSubdivision(double step, const std::vector<Point>& points, std:
 std::tuple<std::vector<double>, std::vector<double>> chebycheffSubdivision(double pas, const std::vector<Point>& points);
 void chebycheffSubdivision(double step, const std::vector<Point>& points, std::vector<double>& T, std::vector<double>& tToEval);
 
-std::vector<double> computeDistanceSubdivision(double step, const std::vector<Point>& points);
-std::vector<double> computeRootDistanceSubdivision(double step, const std::vector<Point>& points);
+std::vector<double> computeDistanceSubdivision(const std::vector<Point>& points);
+std::vector<double> computeRootDistanceSubdivision(const std::vector<Point>& points);
 std::vector<double> computeChebycheffSubdivision(const std::vector<Point>& points);
 
 std::vector<double> createSamples(double step, const std::vector<double>& T);

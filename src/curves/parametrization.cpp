@@ -48,7 +48,7 @@ std::tuple<std::vector<double>, std::vector<double>> distanceSubdivision( double
 
 void distanceSubdivision(double step, const std::vector<Point>& points, std::vector<double>& T, std::vector<double>& tToEval)
 {
-    T = computeDistanceSubdivision(step, points);
+    T = computeDistanceSubdivision(points);
 
     tToEval = createSamples(step, T);
 }
@@ -63,7 +63,7 @@ std::tuple<std::vector<double>, std::vector<double>> rootDistanceSubdivision(dou
 
 void rootDistanceSubdivision(double step, const std::vector<Point>& points, std::vector<double>& T, std::vector<double>& tToEval)
 {
-    T = computeRootDistanceSubdivision(step, points);
+    T = computeRootDistanceSubdivision(points);
     tToEval = createSamples(step, T);
 }
 
@@ -82,7 +82,7 @@ void chebycheffSubdivision(double step, const std::vector<Point>& points, std::v
 }
 
 
-std::vector<double> computeDistanceSubdivision(double step, const std::vector<Point>& points)
+std::vector<double> computeDistanceSubdivision(const std::vector<Point>& points)
 {
     const auto nbElem = points.size();
     std::vector<double> T(nbElem);
@@ -96,7 +96,7 @@ std::vector<double> computeDistanceSubdivision(double step, const std::vector<Po
     return T;
 }
 
-std::vector<double> computeRootDistanceSubdivision(double step, const std::vector<Point>& points)
+std::vector<double> computeRootDistanceSubdivision(const std::vector<Point>& points)
 {
     const auto nbElem = points.size();
     std::vector<double> T(nbElem);
