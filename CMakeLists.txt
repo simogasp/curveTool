@@ -3,6 +3,28 @@ project(CurveTool LANGUAGES CXX)
 
 option(BUILD_TESTS "Enable testing" ON)
 option(BUILD_SHARED_LIBS "Build shared library" ON)
+option(ENABLE_WARNING_AS_ERROR "Enable warnings as errors" OFF)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+    set(CurveTool_COMPILE_OPTIONS "-Wall;-Wextra;-pedantic;-Wno-comment;-Wshadow;-Wnon-virtual-dtor;-Wpedantic;-Wconversion;-Wmisleading-indentation;-Wsign-conversion;-Wfloat-equal")
+    if(ENABLE_WARNINGS_AS_ERRORS)
+        list(APPEND CurveTool_COMPILE_OPTIONS "-Werror")
+    endif()
+elseif(MSVC)
+    set(CurveTool_COMPILE_OPTIONS "/W4;/permissive-;/Zc:__cplusplus")
+    if(ENABLE_WARNINGS_AS_ERRORS)
+        list(APPEND CurveTool_COMPILE_OPTIONS "/WX")
+    endif()
+endif()
+
+# compile definitions for all targets depending on the compiler and the system
+set(CurveTool_COMPILE_DEFINITIONS "")
+if(MSVC)
+    set(CurveTool_COMPILE_DEFINITIONS "-DNOMINMAX;-D_USE_MATH_DEFINES")
+elseif(APPLE)
+    set(CurveTool_COMPILE_DEFINITIONS "-DGL_SILENCE_DEPRECATION")
+endif()
+
 
 if(BUILD_SHARED_LIBS)
     if(WIN32)
@@ -13,6 +35,7 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CurveTool_CXX_FEATURE cxx_std_${CMAKE_CXX_STANDARD})
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
@@ -39,29 +62,25 @@ set(LIB_HEADER_FILES
         src/curves/interpolation.h
         src/curves/InterpolationCurve.h)
 
+set(CurveTool_TARGETS "")
 set(LIBRARY_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_library(curves ${LIB_SOURCE_FILES} ${LIB_HEADER_FILES})
 target_include_directories(curves PUBLIC $<BUILD_INTERFACE:${LIBRARY_INCLUDE_DIR}>)
 target_link_libraries(curves PUBLIC glm::glm)
+list(APPEND CurveTool_TARGETS curves)
 
-set(EXECUTABLE_TARGETS "")
 add_executable(mainApproximation src/mainApproximation.cpp src/Camera.cpp src/Camera.h)
 target_link_libraries (mainApproximation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLEW::glew ${OPENGL_glu_LIBRARY} curves)
-list(APPEND EXECUTABLE_TARGETS "mainApproximation")
+list(APPEND CurveTool_TARGETS mainApproximation)
 
 add_executable(mainInterpolation src/mainInterpolation.cpp src/Camera.cpp src/Camera.h)
 target_link_libraries (mainInterpolation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLEW::glew ${OPENGL_glu_LIBRARY} curves)
-list(APPEND EXECUTABLE_TARGETS "mainInterpolation")
+list(APPEND CurveTool_TARGETS mainInterpolation)
 
-foreach(target ${EXECUTABLE_TARGETS})
-    if(APPLE)
-        target_compile_definitions(${target} PUBLIC GL_SILENCE_DEPRECATION)
-    endif()
-    if(MSVC)
-        target_compile_options(${target} PUBLIC /W4)
-    else()
-        target_compile_options(${target} PUBLIC -Wall -Wextra -Wconversion -Wsign-conversion  -Wshadow -Wpedantic -Werror)
-    endif()
+foreach(target ${CurveTool_TARGETS})
+    target_compile_definitions(${target} PUBLIC ${CurveTool_COMPILE_DEFINITIONS})
+    target_compile_options(${target} PUBLIC ${CurveTool_COMPILE_OPTIONS})
+    target_compile_features(${target} PUBLIC ${CurveTool_CXX_FEATURE})
 endforeach()
 
 if(BUILD_TESTS)
@@ -95,7 +114,9 @@ if(BUILD_TESTS)
     foreach(source ${TESTS_SOURCES})
         add_gtest_test(SOURCE ${source}
             LINK curves
-            PREFIX curves_)
+            PREFIX curves_
+            COMPILE_OPTIONS ${CurveTool_COMPILE_OPTIONS}
+            COMPILE_DEFINITIONS ${CurveTool_COMPILE_DEFINITIONS})
     endforeach()
 
 endif()
