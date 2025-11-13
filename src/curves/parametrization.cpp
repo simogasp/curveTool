@@ -48,7 +48,7 @@ std::tuple<std::vector<double>, std::vector<double>> distanceSubdivision( double
 
 void distanceSubdivision(double step, const std::vector<Point>& points, std::vector<double>& T, std::vector<double>& tToEval)
 {
-    T = computeDistanceSubdivision(step, points);
+    T = computeDistanceSubdivision(points);
 
     tToEval = createSamples(step, T);
 }
@@ -63,7 +63,7 @@ std::tuple<std::vector<double>, std::vector<double>> rootDistanceSubdivision(dou
 
 void rootDistanceSubdivision(double step, const std::vector<Point>& points, std::vector<double>& T, std::vector<double>& tToEval)
 {
-    T = computeRootDistanceSubdivision(step, points);
+    T = computeRootDistanceSubdivision(points);
     tToEval = createSamples(step, T);
 }
 
@@ -82,7 +82,7 @@ void chebycheffSubdivision(double step, const std::vector<Point>& points, std::v
 }
 
 
-std::vector<double> computeDistanceSubdivision(double step, const std::vector<Point>& points)
+std::vector<double> computeDistanceSubdivision(const std::vector<Point>& points)
 {
     const auto nbElem = points.size();
     std::vector<double> T(nbElem);
@@ -96,7 +96,7 @@ std::vector<double> computeDistanceSubdivision(double step, const std::vector<Po
     return T;
 }
 
-std::vector<double> computeRootDistanceSubdivision(double step, const std::vector<Point>& points)
+std::vector<double> computeRootDistanceSubdivision(const std::vector<Point>& points)
 {
     const auto nbElem = points.size();
     std::vector<double> T(nbElem);
@@ -117,7 +117,7 @@ std::vector<double> computeChebycheffSubdivision(const std::vector<Point>& point
 
     for (std::size_t i = 0; i < nbElem; ++i)
     {
-        const double v = ((2 * i + 1) * glm::pi<double>()) / (double)(2 * (nbElem - 1) + 2);
+        const double v = ((2 * static_cast<double>(i) + 1) * glm::pi<double>()) / static_cast<double>(2 * (nbElem - 1) + 2);
         T[i] = std::cos(v);
     }
 
@@ -135,7 +135,7 @@ std::vector<double> createSamples(double step, const std::vector<double>& T)
 
     for(std::size_t i{0}; i < tToEval.size(); ++i)
     {
-        tToEval[i] = start + i * step;
+        tToEval[i] = start + static_cast<double>(i) * step;
     }
     // just assure that the last element is the end value
     if(tToEval.back() < end)

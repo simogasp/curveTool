@@ -11,8 +11,9 @@ Point lerp(const Point &p1, const Point &p2, double t)
 std::optional<std::size_t> getClosestPointIndex(const std::vector<Point>& vec, const Point &p, double threshold)
 {
     double closestDistance = std::numeric_limits<double>::max();
-    std::size_t idxPoint{0};;
+    std::size_t idxPoint{0};
     // Iterate through the points and find the closest point within the threshold
+    bool found{false};
     for(std::size_t i{0}; i < vec.size(); ++i)
     {
         const double dist = distance(vec[i], p);
@@ -20,11 +21,12 @@ std::optional<std::size_t> getClosestPointIndex(const std::vector<Point>& vec, c
         {
             idxPoint = i;
             closestDistance = dist;
+            found = true;
         }
     }
 
     // If the closest distance is the maximum possible value, return an empty optional
-    if (closestDistance == std::numeric_limits<double>::max())
+    if (!found)
     {
         return {};
     }
@@ -80,5 +82,5 @@ void updatePointAtIndex(std::vector<Point>& vec, std::size_t idx, const Point& p
     {
         throw std::invalid_argument("Index of the point to update is out of bounds");
     }
-    vec[idx] = p_new;;
+    vec[idx] = p_new;
 }

@@ -14,17 +14,17 @@ public:
 
     /**
      * The constructor to make a curve drawer.
-     * @param Steps The number of steps for the t value
+     * @param nbSteps The number of steps for the t value
      */
-    explicit BezierCurve(std::size_t steps);
+    explicit BezierCurve(std::size_t nbSteps);
 
     ~BezierCurve() override = default;
 
     /**
      * Makes a new curve from the given vector of control points
-     * @param ControlPoints The control points for the new curve
+     * @param control_points The control points for the new curve
      */
-    void makeFromVector(const std::vector<Point>& ControlPoints);
+    void makeFromVector(const std::vector<Point>& control_points);
 
     /**
      * Adds one point to the control points of the Bezier curve at the end

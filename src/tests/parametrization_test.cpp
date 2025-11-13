@@ -7,7 +7,7 @@
 TEST(UniformParametrizationTest, NumberOfElements)
 {
     // Test that the function returns the correct number of elements for a given step value
-    for(auto step : {5, 10, 13, 25})
+    for(auto step : {5u, 10u, 13u, 25u})
     {
         EXPECT_EQ(uniformParametrization(step).size(), step+1);
     }
@@ -16,7 +16,7 @@ TEST(UniformParametrizationTest, NumberOfElements)
 TEST(UniformParametrizationTest, IncrementValue)
 {
     // Test that the function correctly calculates the increment value
-    for(auto step : {5, 10, 13, 25})
+    for(auto step : {5u, 10u, 13u, 25u})
     {
         const auto exp_increment = 1.0 / step;
         const auto res = uniformParametrization(step);

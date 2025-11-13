@@ -3,9 +3,9 @@
 #include "approximation.h"
 #include <utility>
 
-BezierCurve::BezierCurve(std::size_t steps)
+BezierCurve::BezierCurve(std::size_t nbSteps)
 {
-    this->steps = steps;
+    this->steps = nbSteps;
     curvePoints.reserve(steps + 1);
 }
 
@@ -48,9 +48,9 @@ void BezierCurve::make()
     }
 }
 
-void BezierCurve::makeFromVector(const std::vector<Point>& controlPoints)
+void BezierCurve::makeFromVector(const std::vector<Point>& control_points)
 {
-    setControlPoints(controlPoints);
+    setControlPoints(control_points);
     make();
 }
 
