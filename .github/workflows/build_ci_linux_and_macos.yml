@@ -1,0 +1,55 @@
+name: CI-Build-linux-and-macos
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "39 7 * * 1"
+    
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v5
+
+    - name: Install Linux dependencies with caching
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      if: runner.os == 'Linux'
+      with:
+          # put your list of apt packages here for the dependencies you need
+          packages: libxi-dev libxmu-dev pkg-config autoconf libtool libopengl-dev libglu-dev libx11-dev libxrandr-dev libxxf86vm-dev freeglut3-dev libglm-dev libglew-dev
+          version: 1.0
+
+    - name: Install macOS dependencies with caching
+      uses: tecolicom/actions-use-homebrew-tools@v1
+      if: runner.os == 'macOS'
+      with:
+          # put your list of homebrew packages here for the dependencies you need
+          tools: autoconf automake libtool libxcb freeglut glew XQuartz glm
+
+    - name: Build (Release)
+      uses: lukka/run-cmake@v10
+      with:
+        configurePreset: 'release'
+        buildPreset: 'release'
+        testPreset: 'release'
+
+    - name: Build (Debug)
+      uses: lukka/run-cmake@v10
+      with:
+        configurePreset: 'debug'
+        buildPreset: 'debug'
+        testPreset: 'debug'
