@@ -39,10 +39,8 @@ set(CurveTool_CXX_FEATURE cxx_std_${CMAKE_CXX_STANDARD})
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
-find_package(GLEW REQUIRED)
 find_package(glm REQUIRED)
 message(STATUS "GLM_INCLUDE_DIRS ${GLM_INCLUDE_DIRS}")
-message(STATUS "GLEW_LIBRARIES ${GLEW_LIBRARIES}")
 
 set(LIB_SOURCE_FILES
         src/curves/approximation.cpp
@@ -70,11 +68,11 @@ target_link_libraries(curves PUBLIC glm::glm)
 list(APPEND CurveTool_TARGETS curves)
 
 add_executable(mainApproximation src/mainApproximation.cpp src/Camera.cpp src/Camera.h)
-target_link_libraries (mainApproximation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLEW::glew ${OPENGL_glu_LIBRARY} curves)
+target_link_libraries (mainApproximation OpenGL::GL OpenGL::GLU GLUT::GLUT curves)
 list(APPEND CurveTool_TARGETS mainApproximation)
 
 add_executable(mainInterpolation src/mainInterpolation.cpp src/Camera.cpp src/Camera.h)
-target_link_libraries (mainInterpolation ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLEW::glew ${OPENGL_glu_LIBRARY} curves)
+target_link_libraries (mainInterpolation OpenGL::GL OpenGL::GLU GLUT::GLUT curves)
 list(APPEND CurveTool_TARGETS mainInterpolation)
 
 foreach(target ${CurveTool_TARGETS})
