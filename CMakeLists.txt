@@ -85,21 +85,17 @@ if(BUILD_TESTS)
         FetchContent_MakeAvailable(googletest)
     endif()
     enable_testing()
+    include(cmake/GTestHelper.cmake)
 
-    include(GoogleTest)
-    set(TESTS_TARGETS "")
-    add_executable(parametrization_test src/tests/parametrization_test.cpp)
-    list(APPEND TESTS_TARGETS parametrization_test)
-    add_executable(interpolation_test src/tests/interpolation_test.cpp)
-    list(APPEND TESTS_TARGETS interpolation_test)
-    add_executable(point_test src/tests/point_test.cpp)
-    list(APPEND TESTS_TARGETS point_test)
+     set(TESTS_SOURCES
+        src/tests/parametrization_test.cpp
+        src/tests/interpolation_test.cpp
+        src/tests/point_test.cpp)
 
-    foreach(target ${TESTS_TARGETS})
-        target_link_libraries(${target} GTest::gtest_main curves)
-        gtest_discover_tests(${target} PREFIX curves)
+    foreach(source ${TESTS_SOURCES})
+        add_gtest_test(SOURCE ${source}
+            LINK curves
+            PREFIX curves_)
     endforeach()
-
-
 
 endif()
