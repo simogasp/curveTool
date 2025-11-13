@@ -117,7 +117,7 @@ std::vector<double> computeChebycheffSubdivision(const std::vector<Point>& point
 
     for (std::size_t i = 0; i < nbElem; ++i)
     {
-        const double v = ((2 * i + 1) * glm::pi<double>()) / (double)(2 * (nbElem - 1) + 2);
+        const double v = ((2 * static_cast<double>(i) + 1) * glm::pi<double>()) / static_cast<double>(2 * (nbElem - 1) + 2);
         T[i] = std::cos(v);
     }
 
