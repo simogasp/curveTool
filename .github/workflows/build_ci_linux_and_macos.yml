@@ -25,6 +25,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v5
 
+    - name: Install gcovr
+      run: pip install gcovr
+
     - name: Install Linux dependencies with caching
       uses: awalsh128/cache-apt-pkgs-action@latest
       if: runner.os == 'Linux'
@@ -51,5 +54,28 @@ jobs:
       uses: lukka/run-cmake@v10
       with:
         configurePreset: 'debug'
+        configurePresetAdditionalArgs: "['-DBUILD_WITH_COVERAGE:BOOL=ON']"
         buildPreset: 'debug'
         testPreset: 'debug'
+
+    - name: Generate coverage report (Linux and macOS)
+      working-directory: ./build/debug
+      run: |
+        gcovr --root ../../src --print-summary --xml-pretty --xml coverage.xml .    
+
+    - name: Publish to codecov
+      uses: codecov/codecov-action@v5
+      with:
+        fail_ci_if_error: true # we weren't posting previously
+        flags: ${{ runner.os }}
+        name: ${{ runner.os }}-coverage
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./build/debug/coverage.xml
+
+    - name: Upload coverage to Codacy
+      uses: codacy/codacy-coverage-reporter-action@v1.3.0
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        coverage-reports: ./build/vcpkg-debug/coverage.xml
+        language: cpp
+      continue-on-error: true
