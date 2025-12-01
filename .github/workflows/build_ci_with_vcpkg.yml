@@ -27,7 +27,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     # Linux - if you need some extra dependencies not provided by vcpkg, uncomment this section with the list of the
     # required packages. If they are 'heavy' consider caching using awalsh128/cache-apt-pkgs-action@latest
