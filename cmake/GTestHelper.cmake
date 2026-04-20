@@ -65,7 +65,10 @@ function(add_gtest_test)
 
     # Discover and register the tests
     include(GoogleTest)
-    gtest_discover_tests(${TEST_EXECUTABLE_NAME} PREFIX ${param_PREFIX})
+    gtest_discover_tests(${TEST_EXECUTABLE_NAME} PREFIX ${param_PREFIX}
+        DISCOVERY_MODE POST_BUILD
+        DISCOVERY_TIMEOUT 30
+        )
 
 #    add_test(NAME ${TEST_EXECUTABLE_NAME}
 #             COMMAND ${TEST_EXECUTABLE_NAME} --catch_system_error=yes)
